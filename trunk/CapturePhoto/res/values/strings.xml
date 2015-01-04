@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CapturePhoto</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="frm_gallery">Select From Gallery</string>
+    <string name="frm_camera">Capture From Camera</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_discard">Discard</string>
+    <string name="cd">CD</string>
+
+</resources>
