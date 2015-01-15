@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
+
+    <LinearLayout
+        android:id="@+id/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="150dp"
+        android:weightSum="2" >
+        
+         <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:layout_weight="0"
+           android:layout_marginRight="10dp"
+           android:onClick="TakeHotShots"
+            android:background="@drawable/layout_background" >
+
+            <ImageView
+                android:id="@+id/take_hotshots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+              android:layout_centerHorizontal="true"
+              
+                android:layout_above="@+id/take_text"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/takehotshot" />
+
+            
+
+            <ImageView
+                android:id="@+id/take_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+               
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/takehotshors" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:layout_weight="0"
+            android:onClick="OpenHotShots"
+            android:background="@drawable/layout_background" >
+
+            <ImageView
+                android:id="@+id/open_hotshots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+              
+                android:layout_above="@+id/open_text"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/mailbox" />
+
+            <Button
+                android:id="@+id/notification"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignTop="@+id/open_hotshots"
+                android:layout_marginLeft="-15dp"
+                android:layout_marginTop="-10dp"
+                android:layout_toRightOf="@+id/open_hotshots"
+                android:background="@drawable/notification"
+                android:text="2"
+                android:textColor="#FFF"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/open_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/openhotshorts" />
+        </RelativeLayout>
+        
+        
+    </LinearLayout>
+
+    <include
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/footer" />
+
+</RelativeLayout>

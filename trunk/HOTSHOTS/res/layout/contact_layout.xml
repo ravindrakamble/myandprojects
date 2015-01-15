@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp" >
+
+   
+
+   <ImageView
+        android:id="@+id/trashBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/yellow"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
+    <com.ivd.views.CustomTextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+     
+        android:text="CONtact"
+        android:textColor="#fff"
+        android:paddingBottom="8dp"
+        android:textSize="15sp"
+        android:textStyle="normal" />
+    
+     <TextView
+        android:id="@+id/number"
+        android:layout_below="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     
+     android:paddingTop="10dp"
+        android:text="CONtact"
+        android:textColor="#fff"
+        android:textSize="13sp"
+        android:textStyle="normal" />
+
+</RelativeLayout>

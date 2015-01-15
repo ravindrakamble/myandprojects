@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
+
+    <LinearLayout
+        android:id="@+id/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+          android:paddingBottom="150dp"
+        android:weightSum="2" >
+        
+         <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:layout_weight="0"
+           android:layout_marginRight="10dp"
+           android:onClick="OpenCamera"
+            android:background="@drawable/layout_background" >
+
+            <ImageView
+                android:id="@+id/camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_centerHorizontal="true"
+               android:layout_above="@+id/cameratext"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/camerascreen" />
+
+            
+
+            <ImageView
+                android:id="@+id/cameratext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/camera_logo" />
+        </RelativeLayout>
+
+        <RelativeLayout
+           android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:layout_weight="0"
+            android:onClick="OpenGallery"
+            android:background="@drawable/layout_background" >
+
+            <ImageView
+                android:id="@+id/people"
+                android:layout_width="70dp"
+                android:layout_height="55dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_above="@+id/galleryText"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/image_background"
+                android:src="@drawable/people" />
+
+          
+            <ImageView
+                android:id="@+id/galleryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                  android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/gallery_logo" />
+        </RelativeLayout>
+        
+        
+    </LinearLayout>
+
+    <include
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/footer" />
+
+</RelativeLayout>

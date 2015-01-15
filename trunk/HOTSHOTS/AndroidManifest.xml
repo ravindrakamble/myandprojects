@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ivd.hotshots"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:name="com.ivd.hotshots.AppDelegate"
+        android:allowBackup="true"
+        android:icon="@drawable/appicon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.ivd.hotshots.MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:configChanges="keyboardHidden|orientation" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.RegistrationActivity"
+            android:label="@string/title_activity_registration" 
+            android:configChanges="keyboardHidden|orientation">
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.InformationActivity"
+            android:label="@string/title_activity_information"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.InfoActivity"
+            android:label="@string/title_activity_info"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.ContactBuildActivity"
+            android:label="@string/title_activity_contact_build"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.AddContactsActivity"
+            android:label="@string/title_activity_add_contacts"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.TakeShotActivity"
+            android:label="@string/title_activity_take_shot"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.SenderQuestionActivity"
+            android:label="@string/title_activity_sender_question"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.SenderAnswerActivity"
+            android:label="@string/title_activity_sender_answer"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.ContactsActivity"
+            android:label="@string/title_activity_contacts"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.MessageActivity"
+            android:label="@string/title_activity_message"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.OpenShotsActivity"
+            android:label="@string/title_activity_open_shots"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.ReceiverQuestionActivity"
+            android:label="@string/title_activity_receiver_question"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.ReciverAnswerActivity"
+            android:label="@string/title_activity_reciver_answer"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+           
+            android:name="com.ivd.hotshots.TryAgainActivity"
+            android:label="@string/title_activity_try_again"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.DeleteActivity"
+            android:label="@string/title_activity_delete"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.HotShotsActivity"
+            android:label="@string/title_activity_hot_shots"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.ivd.hotshots.BlurImageActivity"
+            android:label="@string/title_activity_blur_image"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+    </application>
+
+</manifest>
