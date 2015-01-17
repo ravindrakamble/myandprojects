@@ -18,13 +18,11 @@ package com.ivd.http;
 import java.lang.reflect.Type;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.gson.reflect.TypeToken;
+import com.ivd.hotshots.RootActivity;
 import com.ivd.http.RestResponse.StatusCode;
-import com.ivd.http.models.ApiErrorResponse;
 import com.ivd.util.AppConstants;
 
 /**
@@ -42,12 +40,7 @@ public class RestController implements IHandler {
 
 	private UiUpdator uiUpdator;
 
-	private int mRequestCode;
 	private RestRequest mRequest;
-
-	private boolean reqIncomplete;
-
-	private Type output;
 
 	private RestController() {
 
@@ -63,10 +56,7 @@ public class RestController implements IHandler {
 	@Override
 	public final void sendRequest(UiUpdator uiUpdator, final int requestCode, RequestCreator request, final Type outputData) {
 		Log.i(TAG, "sendRequest");
-		reqIncomplete = false;
 		this.uiUpdator = uiUpdator;
-		mRequestCode = requestCode;
-		output = outputData;
 		if(ConnectionManager.getInstance().isOnline(getContext(uiUpdator))){
 			if(outputData instanceof Type) {
 				mRequest = request.createRequest();
@@ -102,11 +92,8 @@ public class RestController implements IHandler {
 	private Context getContext(UiUpdator uiUpdator){
 		Context context = null;
 
-		if(uiUpdator instanceof Activity) {
+		if(uiUpdator instanceof RootActivity) {
 			context = (Activity)uiUpdator;
-		}else {
-			Fragment frag = (Fragment)uiUpdator;
-			context = frag.getActivity();
 		}
 		return context;
 	}

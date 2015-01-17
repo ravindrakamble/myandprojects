@@ -33,6 +33,7 @@ public class RestRequest {
 	/** The method type. */
 	private String methodType;
 
+
 	/**
 	 * Gets the target url.
 	 *
@@ -178,6 +179,7 @@ public class RestRequest {
 	public final void setMethodType(final String rMethodType) {
 		this.methodType = rMethodType;
 	}
+
 
 	/**
 	 * (non-Javadoc).

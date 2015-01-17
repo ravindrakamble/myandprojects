@@ -47,29 +47,7 @@ public class AppParser {
 		Type response = null;
 		try {
 			if(jsonString.indexOf(AppConstants.ERROR_CODE) == -1) {
-				/*if(EAppConstants.ENCRYPTION_VALUE){
-
-					StringBuilder encResp = new StringBuilder();
-					String[] encData = jsonString.split(EAppConstants.COLON_NO_SPACE);
-					String str = null;
-					for(int i = 0; i < encData.length; i++){
-						str = encData[i];
-						if(str.contains("data")){
-							Encryption enc = new Encryption();
-							String str2 = encData[i + 1].trim().substring(1, encData[i + 1].length() - 2);
-							encResp.append(str + EAppConstants.COLON_NO_SPACE);
-							encResp.append(enc.decrypt(str2).trim());
-							encResp.append("}");
-							i++;
-						}else {
-							encResp.append(str);
-						}
-					}
-
-					response = gson.fromJson(encResp.toString(), type);
-				} else {*/
-					response = gson.fromJson(jsonString, type);
-				//}
+				response = gson.fromJson(jsonString, type);
 			} else {
 				Type errorType = new TypeToken<ApiErrorResponse>(){}.getType();
 				response = gson.fromJson(jsonString, errorType);
