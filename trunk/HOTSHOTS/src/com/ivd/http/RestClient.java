@@ -16,17 +16,18 @@
 package com.ivd.http;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import com.ivd.util.AppConstants;
-
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.ivd.util.AppConstants;
 
 
 /**
@@ -93,7 +94,7 @@ public class RestClient {
 		// Default: set the response status code to Failure
 		restResponse.setStatusCode(RestResponse.StatusCode.FAILURE);
 		String inputLine;
-		HttpsURLConnection request = null;
+		HttpURLConnection request = null;
 		StringBuilder response = new StringBuilder();
 		try {
 			if(cancelled){
@@ -101,7 +102,7 @@ public class RestClient {
 			}
 			byte[] dataToWrite = restRequest.getPayload().getBytes();
 			URL url = new URL(restRequest.getTargetUrl());
-			request = (HttpsURLConnection) url.openConnection();
+			request = (HttpURLConnection) url.openConnection();
 
 			if(cancelled){
 				return restResponse;
@@ -118,12 +119,15 @@ public class RestClient {
 				request.setRequestProperty(AppConstants.CONTENT_TYPE, restRequest.getContentType());
 			}
 
+			request.setRequestProperty(AppConstants.CONTENT_LENGTH, "" + dataToWrite.length);
 			if(cancelled){
 				return restResponse;
 			}
-			OutputStream post = request.getOutputStream();
-			post.write(dataToWrite);;
-			post.flush();
+			DataOutputStream wr = new DataOutputStream (
+					request.getOutputStream ());
+			wr.writeBytes (restRequest.getPayload());
+			wr.flush ();
+			wr.close ();
 
 			if(cancelled){
 				return restResponse;
@@ -145,7 +149,6 @@ public class RestClient {
 				while ((inputLine = in.readLine()) != null) {
 					response.append(inputLine);
 				}
-				post.close();
 				in.close();
 
 				restResponse.setContent(response.toString());
@@ -158,7 +161,6 @@ public class RestClient {
 				while ((inputLine = in.readLine()) != null) {
 					response.append(inputLine);
 				}
-				post.close();
 				in.close();
 
 				restResponse.setContent(response.toString());
@@ -168,11 +170,13 @@ public class RestClient {
 					+ restRequest.getPayload());
 			restResponse.setContent(AppConstants.SERVER_NOT_RESPONDING);
 		} catch (Exception e) {
+			e.printStackTrace();
 			Log.e(tag, "Skipped executing incomplete POST request with URL: " + restRequest.getTargetUrl() + ", Payload: "
 					+ restRequest.getPayload());
 			restResponse.setContent(AppConstants.SERVER_NOT_RESPONDING);
 		}finally {
 			try {
+				if(request != null)
 				request.disconnect();
 			} catch (Exception e) {
 				e.printStackTrace();

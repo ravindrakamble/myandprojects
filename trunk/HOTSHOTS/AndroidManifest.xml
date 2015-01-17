@@ -8,9 +8,11 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
     <application
@@ -35,7 +37,7 @@
         </activity>
         <activity
             android:name="com.ivd.hotshots.RegistrationActivity"
-            android:label="@string/title_activity_registration" 
+            android:label="@string/title_activity_registration"
             android:configChanges="keyboardHidden|orientation">
         </activity>
         <activity
@@ -99,7 +101,7 @@
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
-           
+
             android:name="com.ivd.hotshots.TryAgainActivity"
             android:label="@string/title_activity_try_again"
             android:configChanges="keyboardHidden|orientation" >

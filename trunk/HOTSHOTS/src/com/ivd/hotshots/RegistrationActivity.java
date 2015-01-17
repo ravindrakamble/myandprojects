@@ -2,7 +2,11 @@ package com.ivd.hotshots;
 
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.Enumeration;
+import java.util.List;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -19,12 +23,13 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,9 +37,16 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import com.google.gson.reflect.TypeToken;
+import com.ivd.http.RestController;
+import com.ivd.http.RestResponse.StatusCode;
+import com.ivd.http.models.RegResponse;
+import com.ivd.http.UiUpdator;
+import com.ivd.models.Registration;
+import com.ivd.util.AppConstants;
 import com.ivd.util.Utility;
 
-public class RegistrationActivity extends Activity {
+public class RegistrationActivity extends RootActivity implements UiUpdator{
 
 	EditText nameText;
 	EditText emailText;
@@ -54,22 +66,22 @@ public class RegistrationActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_registration);
-		
+
 		nameText = (EditText) findViewById(R.id.nameText);
 		emailText = (EditText) findViewById(R.id.emailText);
 		mobileText =(EditText) findViewById(R.id.mobileText);
 		referelText = (EditText) findViewById(R.id.referelText);
-//		footer_parent =(RelativeLayout) findViewById(R.id.footer_parent);
-//		footer_parent.setEnabled(false);
-//		footer_parent.setAlpha(10);
+		//		footer_parent =(RelativeLayout) findViewById(R.id.footer_parent);
+		//		footer_parent.setEnabled(false);
+		//		footer_parent.setAlpha(10);
 		Utility.setupUIKeyboardListner(findViewById(R.id.parent), this);
 		Utility.HideKeyboardOnStart(this);
 		SetValue();
-		
+
 	}
 
 	public void SetValue(){
@@ -77,7 +89,7 @@ public class RegistrationActivity extends Activity {
 		emailText.setText("sbell1@gmail.com");
 		mobileText.setText("+61641547160");
 		referelText.setText("1");
-		
+
 	}
 	private Boolean verify() {
 
@@ -85,9 +97,9 @@ public class RegistrationActivity extends Activity {
 
 		String name = nameText.getText().toString();
 		String email = emailText.getText().toString();
-		
+
 		String mobile = mobileText.getText().toString();
-		
+
 
 		if (mobile.length() <= 0) {
 			Utility.ShowNotification(this, "Please provide mobile number");
@@ -101,13 +113,13 @@ public class RegistrationActivity extends Activity {
 			Utility.ShowNotification(this, "Please provide name");
 			return false;
 		}
-		
+
 		return isVerify;
 	}
 	public void Save(View v) {
 		Boolean isVerify = verify();
 		if (isVerify == true) {
-			
+
 			AppDelegate delegate = (AppDelegate) getApplicationContext();
 			delegate.name = nameText.getText().toString();
 			delegate.email = emailText.getText().toString();
@@ -115,13 +127,12 @@ public class RegistrationActivity extends Activity {
 			delegate.referredID = referelText.getText().toString();
 			delegate.uid = "1";
 			delegate.isRegistered =1;
-			
+
 			delegate.setInMemory();
-			ShowMainActivity();
-			finish();
-			
-		//	new AppRegistration().execute("");
-			
+
+			sendRegistrationRequest();
+			//new AppRegistration().execute(new String[]{});
+
 		}
 	}
 
@@ -129,7 +140,7 @@ public class RegistrationActivity extends Activity {
 		Intent intent = new Intent(this,MainActivity.class);
 		startActivity(intent);
 	}
-	
+
 	class AppRegistration extends AsyncTask<String, Long, Void> {
 
 		DefaultHttpClient mHttpClient;
@@ -164,21 +175,21 @@ public class RegistrationActivity extends Activity {
 				delegate.email = emailText.getText().toString();
 				delegate.mobile = mobileText.getText().toString();;
 				delegate.referredID = referelText.getText().toString();
-				
+
 				delegate.isRegistered =1;
-				
+
 				delegate.uid = obj.getString("user_id");
-				
-				
-				
+
+
+
 				delegate.setInMemory();
 				ShowMainActivity();
 				finish();
-				
+
 				Utility.ShowNotification(RegistrationActivity.this,
 						"Registered Successfully");
-				
-			
+
+
 
 			} catch (Exception e) {
 				Utility.ShowNotification(RegistrationActivity.this,
@@ -192,7 +203,7 @@ public class RegistrationActivity extends Activity {
 		protected Void doInBackground(String... params) {
 			// TODO Auto-generated method stub
 			String baseUrl = Constant.URL;
-		
+
 
 			String action = "register";
 
@@ -204,8 +215,8 @@ public class RegistrationActivity extends Activity {
 				multipartEntity.addPart("action", new StringBody(action));
 				multipartEntity.addPart("device_type",
 						new StringBody("android"));
-//				multipartEntity.addPart("device_id", new StringBody(
-//						GCMRegistrar.getRegistrationId(getApplicationContext())));
+				//				multipartEntity.addPart("device_id", new StringBody(
+				//						GCMRegistrar.getRegistrationId(getApplicationContext())));
 				multipartEntity.addPart("device_id", new StringBody(
 						"1234567890"));
 
@@ -219,11 +230,27 @@ public class RegistrationActivity extends Activity {
 				multipartEntity.addPart("ref_id", new StringBody(referelText
 						.getText().toString()));
 
-				
+
 
 				_httpPost.setEntity(multipartEntity);
+
+				java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream(
+						(int) multipartEntity.getContentLength());
+				multipartEntity.writeTo(out);
+				String entityContentAsString = new String(out.toByteArray());
+				Log.e("multipartEntitty:", "" + entityContentAsString);
 				mHttpClient.execute(_httpPost, new WebserviceResponseHandler());
 				Log.e("post", _httpPost.toString());
+
+				Header[] headers = _httpPost.getAllHeaders();
+
+
+				System.out.println(_httpPost.toString());
+				for (Header header : headers) {
+					System.out.println(header.getName() + ": " + header.getValue());
+				}
+				System.out.println();
+
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -260,6 +287,38 @@ public class RegistrationActivity extends Activity {
 
 		}
 
+	}
+
+	private void sendRegistrationRequest(){
+
+		Registration regObj = new Registration();
+		regObj.setName(nameText.getText().toString());
+		regObj.setEmail(emailText.getText().toString());
+		regObj.setMobile(mobileText.getText().toString());
+		regObj.setRefID(referelText.getText().toString());
+
+		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+		regObj.setDeviceID(telephonyManager.getDeviceId());
+
+		regObj.setDeviceType(AppConstants.DEVICE_TYPE);
+
+		Type type = new TypeToken<RegResponse>(){}.getType();
+		sendRequest(AppConstants.REQUEST_REGISTRATION, regObj, type);
+
+		showProgressDialog();
+	}
+	@Override
+	public void updateUI(int requestCode, StatusCode statusCode,
+			int responseCode, Type data) {
+		if(statusCode == StatusCode.SUCCESS){
+			if(requestCode == AppConstants.REQUEST_REGISTRATION){
+				ShowMainActivity();
+				finish();
+			}
+		}else{
+			Utility.ShowNotification(this, getString(R.string.error_failed_to_register));
+		}
+		hideProgressDialog();
 	}
 
 }

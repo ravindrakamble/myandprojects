@@ -22,6 +22,10 @@
     <string name="title_activity_delete">DeleteActivity</string>
     <string name="title_activity_hot_shots">HotShotsActivity</string>
     <string name="title_activity_blur_image">BlurImageActivity</string>
+
+    <!-- Messages  -->
+    <string name="error_failed_to_register">Failed to register, Please try later.</string>
+
     <string name="crash_toast_text">Ooooops ! I crashed, but a report has been sent to my developer to help fix the issue !</string>
 
 </resources>

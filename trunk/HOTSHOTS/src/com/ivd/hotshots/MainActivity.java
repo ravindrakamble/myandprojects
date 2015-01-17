@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
+
+import com.ivd.http.RestResponse.StatusCode;
+import com.ivd.http.UiUpdator;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -23,29 +27,29 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements UiUpdator{
 
-	
+
 	int imageStatus = 0;
 	final CharSequence[] uploadOptions = { "Choose From Gallery" };
-	
+
 	private static final int REQUEST_CODE_GALLERY = 2;
 	private static final int REQUEST_CODE_CAMERA = 1;
 	private String picname = "profile.jpg";
 	//private String blurImage = "blur.jpg";
-	
+
 	private String filepath1 = Environment.getExternalStorageDirectory()
 			+ File.separator + picname;
-	
+
 //	private String filepath2 = Environment.getExternalStorageDirectory()
 //			+ File.separator + blurImage;
-	
+
 	Dialog dialog;
 	int height;
 	int width;
 	Bitmap bmp = null;
 	ProgressDialog progressDialog = null;
-	
+
 
 	private String filepath;
 	private String imagename;
@@ -62,7 +66,7 @@ public class MainActivity extends Activity {
 		if(delegate.isRegistered ==1){
 			delegate.isRegistered =0;
 		ShowAddContacts();
-		
+
 		}
 	}
 	@Override
@@ -78,30 +82,30 @@ public class MainActivity extends Activity {
 		}
 	}
 	public void ShowAddContacts(){
-		
+
 		Intent intent = new Intent(MainActivity.this,
 				AddContactsActivity.class);
 		startActivity(intent);
-		
+
 	}
 
 	public void SetSettings(){
 		ImageButton settingBtn=(ImageButton)findViewById(R.id.settingBtn);
 		settingBtn.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(MainActivity.this,
 						InformationActivity.class);
 				startActivity(intent);
-				
-				
+
+
 			}
 		});
 	}
 	public void TakeHotShots(View v){
-		
+
 	/*	PopupMenu popup = new PopupMenu(MainActivity.this, v);
 		// Inflating the Popup using xml file
 		popup.getMenuInflater().inflate(R.menu.camera_option, popup.getMenu());
@@ -112,7 +116,7 @@ public class MainActivity extends Activity {
 
 				switch (item.getItemId()) {
 				case R.id.four:
-					
+
 					OpenCamera();
 					break;
 
@@ -120,7 +124,7 @@ public class MainActivity extends Activity {
 					OpenGallery();
 					break;
 
-			
+
 				default:
 					break;
 				}
@@ -131,23 +135,23 @@ public class MainActivity extends Activity {
 		popup.show();// showing popup menu*/
 		Intent intent = new Intent(MainActivity.this,
 				TakeShotActivity.class);
-		startActivity(intent);	
-		
+		startActivity(intent);
+
 	}
 
 	public void OpenHotShots(View v){
 		Intent intent = new Intent(MainActivity.this,
 				OpenShotsActivity.class);
 		startActivity(intent);
-		
+
 	}
-	
+
 	//------------Open Camera Portion-------------------------//
 	public void OpenCamera(){
-		
+
 		imagename = picname;
 		filepath = filepath1;
-		
+
 	Uri outputFileUri = Uri
 				.fromFile(new File(filepath));
 		Intent intent = new Intent(
@@ -158,7 +162,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void OpenGallery(){
-		
+
 		imagename = picname;
 		Intent photoPickerIntent = new Intent(
 				Intent.ACTION_PICK);
@@ -168,9 +172,9 @@ public class MainActivity extends Activity {
 		startActivityForResult(photoPickerIntent,
 				REQUEST_CODE_GALLERY);
 	}
-	
-	
-	
+
+
+
 
 	public static int calculateInSampleSize(BitmapFactory.Options options,
 			int reqWidth, int reqHeight) {
@@ -222,9 +226,9 @@ public class MainActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		switch (requestCode) {
-		
+
 		case REQUEST_CODE_GALLERY:
-			
+
 			if (resultCode == Activity.RESULT_OK) {
 				Uri selectedImage = data.getData();
 				String[] filePathColumn = { MediaStore.Images.Media.DATA };
@@ -239,46 +243,46 @@ public class MainActivity extends Activity {
 				 height = 400;
 					width = 400;
 					bmp = decodeSampledBitmapFromResource(width, height);
-			
+
 				storeImage(bmp);
-				
-				
+
+
 				ShowQuestion();
 
 			}
 			break;
-			
+
 		case REQUEST_CODE_CAMERA:
-			
+
 			if (resultCode == Activity.RESULT_OK) {
-				
+
 				height = 400;
 				width = 400;
 				bmp = decodeSampledBitmapFromResource(width, height);
-			
+
 				storeImage(bmp);
-				
+
 				ShowQuestion();
-				
+
 
 			}
 			break;
 
 
-			
+
 		}
-		
-		
+
+
 
 	}
-	
+
 	public void storeImage(Bitmap image) {
 	    File pictureFile = getOutputMediaFile();
 	    if (pictureFile == null) {
 	        Log.d("DEBUG",
 	                "Error creating media file, check storage permissions: ");// e.getMessage());
 	        return;
-	    } 
+	    }
 	    try {
 	        FileOutputStream fos = new FileOutputStream(pictureFile);
 	        image.compress(Bitmap.CompressFormat.PNG, 90, fos);
@@ -287,16 +291,16 @@ public class MainActivity extends Activity {
 	        Log.d("DEBUG", "File not found: " + e.getMessage());
 	    } catch (IOException e) {
 	        Log.d("DEBUG", "Error accessing file: " + e.getMessage());
-	    }  
+	    }
 	}
-	
+
 	public  File getOutputMediaFile(){
 	    // To be safe, you should check that the SDCard is mounted
-	    // using Environment.getExternalStorageState() before doing this. 
+	    // using Environment.getExternalStorageState() before doing this.
 	    File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
 	            + "/Android/data/"
 	            + getApplicationContext().getPackageName()
-	            + "/Files"); 
+	            + "/Files");
 
 	    // This location works best if you want the created images to be shared
 	    // between applications and persist after your app has been uninstalled.
@@ -306,22 +310,32 @@ public class MainActivity extends Activity {
 	        if (! mediaStorageDir.mkdirs()){
 	            return null;
 	        }
-	    } 
+	    }
 	    // Create a media file name
-	  
+
 	    File mediaFile;
-	      
-	        mediaFile = new File(mediaStorageDir.getPath() + File.separator + imagename);  
+
+	        mediaFile = new File(mediaStorageDir.getPath() + File.separator + imagename);
 	    return mediaFile;
-	} 
-	
+	}
+
 	public void ShowQuestion(){
-		
+
 		AppDelegate delegate = (AppDelegate) getApplicationContext();
 		delegate.picname = imagename;
 		Intent intent = new Intent(this,SenderQuestionActivity.class);
 		startActivity(intent);
 		//finish();
 	}
-	
+
+	private void sendRegistrationRequest(){
+
+	}
+	@Override
+	public void updateUI(int requestCode, StatusCode statusCode,
+			int responseCode, Type data) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
