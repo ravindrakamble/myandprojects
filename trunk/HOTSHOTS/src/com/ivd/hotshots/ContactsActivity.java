@@ -1,11 +1,13 @@
 package com.ivd.hotshots;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +19,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
+import com.ivd.http.UiUpdator;
+import com.ivd.http.RestResponse.StatusCode;
+import com.ivd.http.models.RegResponse;
 import com.ivd.models.Contacts;
 import com.ivd.models.Hotshots;
+import com.ivd.models.Registration;
+import com.ivd.util.AppConstants;
+import com.ivd.util.Utility;
 
-public class ContactsActivity extends Activity {
+public class ContactsActivity extends RootActivity implements UiUpdator {
 
 	private ListView contact_list;
 	ContactAdapter adapter;
@@ -87,14 +96,19 @@ public class ContactsActivity extends Activity {
 				hotshot.setBlurimage(delegate.blurImageName);
 				hotshot.setAngle(delegate.angle);
 				delegate.hotshotList.add(hotshot);
+				sendHotshot(hotshot);
 			}
 
 		}
-		// Utility.ShowNotification(this, "Total hotshots contacts "
-		// +delegate.contactList.size() );
-		this.finish();
+
 	}
 
+	private void sendHotshot(Hotshots hotshot){
+		Type type = new TypeToken<RegResponse>(){}.getType();
+		sendRequest(AppConstants.REQUEST_UPLOAD_HOTSHOT, hotshot, type);
+
+		showProgressDialog();
+	}
 	class ContactAdapter extends ArrayAdapter<Contacts> {
 
 		private final Context context;
@@ -129,6 +143,19 @@ public class ContactsActivity extends Activity {
 
 			return rowView;
 		}
+	}
+
+	@Override
+	public void updateUI(int requestCode, StatusCode statusCode,
+			int responseCode, Type data) {
+		if(statusCode == StatusCode.SUCCESS){
+			if(requestCode == AppConstants.REQUEST_UPLOAD_HOTSHOT){
+				finish();
+			}
+		}else{
+			Utility.ShowNotification(this, getString(R.string.error_failed_to_register));
+		}
+		hideProgressDialog();
 	}
 
 }
