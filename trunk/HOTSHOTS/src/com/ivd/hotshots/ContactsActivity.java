@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -22,6 +23,9 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.ivd.http.UiUpdator;
 import com.ivd.http.RestResponse.StatusCode;
+import com.ivd.http.models.ContactData;
+import com.ivd.http.models.ContactDataResp;
+import com.ivd.http.models.ContactLisetResp;
 import com.ivd.http.models.RegResponse;
 import com.ivd.models.Contacts;
 import com.ivd.models.Hotshots;
@@ -33,7 +37,7 @@ public class ContactsActivity extends RootActivity implements UiUpdator {
 
 	private ListView contact_list;
 	ContactAdapter adapter;
-
+	private SharedPreferences sharedpreferences;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +68,22 @@ public class ContactsActivity extends RootActivity implements UiUpdator {
 			}
 
 		});
-		SetContacts();
-
+		//SetContacts();
+		sendGetContacts();
 	}
 
+
+	private void sendGetContacts(){
+		ContactData data = new ContactData();
+
+		sharedpreferences = getSharedPreferences(AppConstants.IVD_PREF, Context.MODE_PRIVATE);
+		data.setUser_id(sharedpreferences.getString(AppConstants.KEY_USER_ID, ""));
+
+		Type type = new TypeToken<ContactLisetResp[]>(){}.getType();
+		sendRequest(AppConstants.REQUEST_CONTACT_LIST, data, type);
+
+		showProgressDialog();
+	}
 	public void SetContacts() {
 		AppDelegate delegate = (AppDelegate) getApplicationContext();
 		for (int i = 0; i < delegate.contactList.size(); i++) {
@@ -151,6 +167,8 @@ public class ContactsActivity extends RootActivity implements UiUpdator {
 		if(statusCode == StatusCode.SUCCESS){
 			if(requestCode == AppConstants.REQUEST_UPLOAD_HOTSHOT){
 				finish();
+			}else if(requestCode == AppConstants.REQUEST_CONTACT_LIST){
+				//sendHotshot(null);
 			}
 		}else{
 			Utility.ShowNotification(this, getString(R.string.error_failed_to_register));
