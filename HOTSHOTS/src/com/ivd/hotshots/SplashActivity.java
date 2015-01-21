@@ -1,8 +1,12 @@
 package com.ivd.hotshots;
 
 
+import com.ivd.util.AppConstants;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,8 +14,9 @@ import android.view.Window;
 
 public class SplashActivity extends Activity {
 
-	
+
 	private static final int SPLASH_DURATION = 1500;
+	private SharedPreferences sharedpreferences;
 	String pns;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +28,7 @@ public class SplashActivity extends Activity {
 		GCMRegistrar.checkManifest(this);
 		pns = GCMRegistrar.getRegistrationId(this);
 		if (pns.equals("")) {
-			// Registration is not present, register now with GCM			
+			// Registration is not present, register now with GCM
 			GCMRegistrar.register(this, SENDER_ID);
 			pns= GCMRegistrar.getRegistrationId(this);
 			Log.e("PNS TOKEN",pns);
@@ -39,15 +44,23 @@ public class SplashActivity extends Activity {
 
 				/*AppDelegate delegate = (AppDelegate)getApplicationContext();
 				delegate.getFromMemory();
-				
-				if(delegate.isRegistered == 1){	
+
+				if(delegate.isRegistered == 1){
 					StartMainActivity();
 				}else{
 					StartRegistryActivity();
 				}
 				*/
-				StartRegistryActivity();
 
+				/*sharedpreferences = getSharedPreferences(AppConstants.IVD_PREF, Context.MODE_PRIVATE);
+				String user_id = sharedpreferences.getString(AppConstants.KEY_USER_ID, "");
+
+				if(user_id != null && user_id.trim().length() > 0){
+					StartMainActivity();
+				}else{
+					StartRegistryActivity();
+				}*/
+				StartRegistryActivity();
 				SplashActivity.this.finish();
 			}
 		}, SPLASH_DURATION);

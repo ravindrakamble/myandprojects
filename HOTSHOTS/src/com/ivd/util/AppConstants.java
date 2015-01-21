@@ -13,6 +13,13 @@ public interface AppConstants {
 	String METHOD_UPDATE_MESSAGE = "updatemessage";
 	String METHOD_MESSAGE_LIST = "messagelist";
 
+	String IVD_PREF = "IVDPREF";
+	String KEY_USER_ID = "userID";
+	String KEY_USER_MOBILE = "mobile";
+	String KEY_USER_EMAIL = "email";
+	String MESSAGE = "Please Wait...";
+
+
 	String ERROR_CODE = "error";
 	String METHOD_TYPE_GET = "GET";
 	String METHOD_TYPE_POST = "POST";

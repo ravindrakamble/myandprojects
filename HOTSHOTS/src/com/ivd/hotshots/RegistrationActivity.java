@@ -3,8 +3,6 @@ package com.ivd.hotshots;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.Enumeration;
-import java.util.List;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -26,6 +24,8 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,10 +38,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.google.gson.reflect.TypeToken;
-import com.ivd.http.RestController;
 import com.ivd.http.RestResponse.StatusCode;
-import com.ivd.http.models.RegResponse;
 import com.ivd.http.UiUpdator;
+import com.ivd.http.models.RegResponse;
 import com.ivd.models.Registration;
 import com.ivd.util.AppConstants;
 import com.ivd.util.Utility;
@@ -55,10 +54,11 @@ public class RegistrationActivity extends RootActivity implements UiUpdator{
 	ProgressDialog progressDialog = null;
 	private String resultString = "";
 	RelativeLayout  footer_parent;
+	Registration regObj;
+	private SharedPreferences sharedpreferences;
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		// TODO Auto-generated method stub
-
 		Utility.HideSoftKeyboard(this);
 
 		return super.onTouchEvent(event);
@@ -291,7 +291,7 @@ public class RegistrationActivity extends RootActivity implements UiUpdator{
 
 	private void sendRegistrationRequest(){
 
-		Registration regObj = new Registration();
+		regObj = new Registration();
 		regObj.setName(nameText.getText().toString());
 		regObj.setEmail(emailText.getText().toString());
 		regObj.setMobile(mobileText.getText().toString());
@@ -312,8 +312,20 @@ public class RegistrationActivity extends RootActivity implements UiUpdator{
 			int responseCode, Type data) {
 		if(statusCode == StatusCode.SUCCESS){
 			if(requestCode == AppConstants.REQUEST_REGISTRATION){
-				ShowMainActivity();
-				finish();
+				if(data instanceof RegResponse){
+					RegResponse resgResponse = (RegResponse)data;
+					//store in memory
+					sharedpreferences = getSharedPreferences(AppConstants.IVD_PREF, Context.MODE_PRIVATE);
+
+					Editor editor = sharedpreferences.edit();
+					editor.putString(AppConstants.KEY_USER_ID, resgResponse.getUserID());
+					editor.putString(AppConstants.KEY_USER_EMAIL, regObj.getEmail());
+					editor.putString(AppConstants.KEY_USER_MOBILE, regObj.getMobile());
+					editor.commit();
+
+					ShowMainActivity();
+					finish();
+				}
 			}
 		}else{
 			Utility.ShowNotification(this, getString(R.string.error_failed_to_register));
