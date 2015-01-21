@@ -10,6 +10,7 @@ import com.ivd.http.RestController;
 import com.ivd.http.RestResponse.StatusCode;
 import com.ivd.http.UiUpdator;
 import com.ivd.http.request.GeneralRequest;
+import com.ivd.util.AppConstants;
 
 public abstract class RootActivity extends Activity implements UiUpdator{
 
@@ -18,6 +19,19 @@ public abstract class RootActivity extends Activity implements UiUpdator{
 
 	public void showProgressDialog(){
 		progressDialog = new ProgressDialog(this);
+		progressDialog.setMessage(AppConstants.MESSAGE);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				dialog.cancel();
+			}
+		});
+		progressDialog.show();
+	}
+	public void showProgressDialog(String message){
+		progressDialog = new ProgressDialog(this);
+		progressDialog.setMessage(message);
 		progressDialog.setCanceledOnTouchOutside(false);
 		progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 			@Override

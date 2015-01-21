@@ -1,6 +1,7 @@
 package com.ivd.hotshots;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +24,13 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,16 +43,23 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
+import com.ivd.http.UiUpdator;
+import com.ivd.http.RestResponse.StatusCode;
+import com.ivd.http.models.ContactData;
+import com.ivd.http.models.ContactDataResp;
 import com.ivd.models.Contacts;
+import com.ivd.util.AppConstants;
 import com.ivd.util.Utility;
 
-public class AddContactsActivity extends Activity {
+public class AddContactsActivity extends RootActivity implements UiUpdator {
 
 	private ListView contact_list;
 	ContactAdapter adapter;
 	ProgressDialog progressDialog = null;
 	private String resultString = "";
 	private String mobileString="";
+	private SharedPreferences sharedpreferences;
 	List<Contacts> contactList = new ArrayList<Contacts>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +77,7 @@ public class AddContactsActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
-				
+
 				Contacts contact = contactList.get(position);
 				if (contact.getStatus() == 0) {
 					contact.setStatus(1);
@@ -82,7 +92,7 @@ public class AddContactsActivity extends Activity {
 	}
 
 	public void RetriveContacts(){
-		Cursor cursor = getContentResolver().query( ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null,null, null);
+		Cursor cursor = getContentResolver().query( ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null,null, Phone.DISPLAY_NAME + " ASC");
 		while (cursor.moveToNext()) {
 			Contacts contact = new Contacts();
 			String name =cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
@@ -95,27 +105,48 @@ public class AddContactsActivity extends Activity {
 			}
 		adapter.notifyDataSetChanged();
 	}
-	
+
 	public void SetHeader(){
 		TextView title = (TextView) findViewById(R.id.title);
 		title.setText("ADD CONTACTS");
 	}
 	public void SYNC(View v){
-		
+
 		mobileString = "";
 		AppDelegate delegate = (AppDelegate) getApplicationContext();
 		for(int i=0;i<contactList.size();i++){
 			Contacts contact = contactList.get(i);
 			if(contact.getStatus() == 1){
 				delegate.contactList.add(contact);
-				//mobileString = mobileString+","+contact.getPhone();
+				if(contact.getPhone() != null && contact.getPhone().trim().length() > 0){
+					if(mobileString.length() > 0){
+						mobileString = mobileString + "," + contact.getPhone();
+					}else{
+						mobileString = contact.getPhone();;
+					}
+				}
 			}
-			
+
 		}
-		//new ContactSync().execute("");
-		Utility.ShowNotification(this, "Total sync contacts " +delegate.contactList.size()  );		this.finish();
+
+		sendSyncContactsRequest(mobileString);
 	}
-	
+
+
+	private void sendSyncContactsRequest(String mobileNumbers){
+
+		ContactData data = new ContactData();
+
+		sharedpreferences = getSharedPreferences(AppConstants.IVD_PREF, Context.MODE_PRIVATE);
+		data.setUser_id(sharedpreferences.getString(AppConstants.KEY_USER_ID, ""));
+		data.setMobile(mobileNumbers);
+
+		Type type = new TypeToken<ContactDataResp>(){}.getType();
+		sendRequest(AppConstants.REQUEST_CONTACT_SYNC, data, type);
+
+		showProgressDialog();
+	}
+
 	class ContactAdapter extends ArrayAdapter<Contacts> {
 
 		private final Context context;
@@ -144,7 +175,7 @@ public class AddContactsActivity extends Activity {
 			number.setText(contact.getPhone());
 			ImageView chckBox = (ImageView) rowView.findViewById(R.id.trashBtn);
 
-			
+
 
 			name.setText(contact.getName());
 
@@ -156,7 +187,7 @@ public class AddContactsActivity extends Activity {
 			}
 
 			return rowView;
-		
+
 
 			/*if (contact.getStatus() == 0) {
 				chckBox.setChecked(false);
@@ -170,7 +201,7 @@ public class AddContactsActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					// is chkIos checked?
-					
+
 					Contacts cat = contactList.get(pos);
 					if (((CheckBox) v).isChecked()) {
 
@@ -187,7 +218,7 @@ public class AddContactsActivity extends Activity {
 		}
 	}
 
-	
+
 	class ContactSync extends AsyncTask<String, Long, Void> {
 
 		DefaultHttpClient mHttpClient;
@@ -219,8 +250,8 @@ public class AddContactsActivity extends Activity {
 
 				Utility.ShowNotification(AddContactsActivity.this, "Total sync contacts " +obj.getString("matched_contact"));
 //				this.finish();
-				
-			
+
+
 
 			} catch (Exception e) {
 				Utility.ShowNotification(AddContactsActivity.this,
@@ -249,7 +280,7 @@ public class AddContactsActivity extends Activity {
 						new StringBody(mobileString));
 
 
-				
+
 
 				_httpPost.setEntity(multipartEntity);
 				mHttpClient.execute(_httpPost, new WebserviceResponseHandler());
@@ -290,6 +321,23 @@ public class AddContactsActivity extends Activity {
 
 		}
 
+	}
+
+	@Override
+	public void updateUI(int requestCode, StatusCode statusCode,
+			int responseCode, Type data) {
+		if(statusCode == StatusCode.SUCCESS){
+			if(requestCode == AppConstants.REQUEST_CONTACT_SYNC){
+				if(data instanceof ContactDataResp){
+					ContactDataResp contactResponse = (ContactDataResp)data;
+					Utility.ShowNotification(this, "Total sync contacts " + contactResponse.getMatched_contact()  );
+					this.finish();
+				}
+			}
+		}else{
+			Utility.ShowNotification(this, getString(R.string.error_failed_to_register));
+		}
+		hideProgressDialog();
 	}
 
 }
