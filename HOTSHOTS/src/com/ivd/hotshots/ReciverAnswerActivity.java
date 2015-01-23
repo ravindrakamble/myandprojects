@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import java.lang.reflect.Type;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -22,10 +23,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import com.google.gson.reflect.TypeToken;
+import com.ivd.http.UiUpdator;
+import com.ivd.http.models.RegResponse;
+import com.ivd.util.AppConstants;
 import com.ivd.util.Utility;
 
-public class ReciverAnswerActivity extends Activity {
+@SuppressLint("NewApi")
+public class ReciverAnswerActivity extends RootActivity implements UiUpdator {
 
 	EditText answerView;
 	int count = 10;
@@ -33,7 +38,7 @@ public class ReciverAnswerActivity extends Activity {
 	private RelativeLayout try_again_layout;
 
 	private RelativeLayout delete_layout;
-	
+
 	private LinearLayout answerbox;
 	TextView guess;
 
@@ -61,12 +66,12 @@ public class ReciverAnswerActivity extends Activity {
 		//transparentDeleteView = (View) findViewById(R.id.transparentDeleteView);
 		answerbox = (LinearLayout) findViewById(R.id.answerbox);
 		guess = (TextView) findViewById(R.id.guessText);
-		
+
 		try_again_layout.setVisibility(View.INVISIBLE);
 		delete_layout.setVisibility(View.INVISIBLE);
-		
-		
-		
+
+
+
 
 		Utility.setupUIKeyboardListner(findViewById(R.id.parent), this);
 		Utility.HideKeyboardOnStart(this);
@@ -115,6 +120,7 @@ public class ReciverAnswerActivity extends Activity {
 				if (count == 0) {
 
 					ShowDelete();
+					sendUpdateMessage();
 				} else {
 					ShowTryAgain();
 				}
@@ -128,6 +134,7 @@ public class ReciverAnswerActivity extends Activity {
 		startActivity(intent);
 	}
 
+	@SuppressLint("NewApi")
 	public void ShowTryAgain() {
 		/*Intent intent = new Intent(this, TryAgainActivity.class);
 		startActivity(intent);*/
@@ -135,33 +142,40 @@ public class ReciverAnswerActivity extends Activity {
 		try_again_layout.setVisibility(View.VISIBLE);
 		delete_layout.setVisibility(View.INVISIBLE);
 		answerView.setEnabled(false);
-		
+
 		answerbox.setAlpha(128);
 	}
 
+	@SuppressLint("NewApi")
 	public void ShowDelete() {
 		/*Intent intent = new Intent(this, DeleteActivity.class);
 		startActivity(intent);*/
 		try_again_layout.setVisibility(View.INVISIBLE);
 		delete_layout.setVisibility(View.VISIBLE);
 		answerbox.setEnabled(false);
-		
+
 		answerbox.setAlpha(128);
 
 	}
 
+	private void sendUpdateMessage(){
+		Type type = new TypeToken<RegResponse>(){}.getType();
+		sendRequest(AppConstants.REQUEST_UPDATE_MESSAGE, null, type);
+
+		showProgressDialog();
+	}
 	public void TRYAGAIN(View v){
-	
-	
-		
+
+
+
 		try_again_layout.setVisibility(View.INVISIBLE);
 		delete_layout.setVisibility(View.INVISIBLE);
 		answerView.setEnabled(true);
-		
+
 		answerbox.setAlpha(255);
 	}
-	
-	
+
+
 	public void BACK(View v){
 		Intent intent = new Intent(this,
 				MainActivity.class);
@@ -191,7 +205,7 @@ public class ReciverAnswerActivity extends Activity {
 			int width = bitmap.getWidth();
 			int height = bitmap.getHeight();
 
-			
+
 			if (height > width) {
 				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 				hotshot.setImageBitmap(bitmap);
