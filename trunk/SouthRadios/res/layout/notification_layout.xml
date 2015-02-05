@@ -1,0 +1,34 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <TextView
+        android:id="@+id/radioName_N"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/radioIcon_N"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:textColor="#ffffff"
+        android:textSize="18dp" />
+
+    <ImageView
+        android:id="@+id/radioIcon_N"
+        android:layout_centerVertical="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ar_rahman_radio" />
+
+    <TextView
+        android:id="@+id/radioCaption_N"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioName_N"
+        android:layout_toRightOf="@+id/radioIcon_N"
+        android:paddingLeft="5dp"
+        android:textColor="#ffffff"
+        android:textSize="12dp" />
+
+</RelativeLayout>
