@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/minimize"
+        style="@style/MenuTextStyle"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Minimize"/>
+    <item
+        android:id="@+id/exit"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Exit"/>
+
+</menu>
