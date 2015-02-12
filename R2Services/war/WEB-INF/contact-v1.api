@@ -1,0 +1,189 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://r2appservices.appspot.com/_ah/api",
+  "name" : "contact",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://r2appservices.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "contact.getcontacts" : {
+      "path" : "getContacts",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.Services.getContacts",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "contact.addAddress" : {
+      "path" : "addAddress",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.Services.addAddress",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "contact.delete" : {
+      "path" : "delete",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.Services.delete",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "contact.addContact" : {
+      "path" : "addContact",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.Services.addContact",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "ApiResponse" : {
+        "id" : "ApiResponse",
+        "type" : "object",
+        "properties" : {
+          "responseCode" : {
+            "type" : "integer"
+          },
+          "responseStatus" : {
+            "type" : "string"
+          },
+          "responseMessage" : {
+            "type" : "string"
+          },
+          "responseBody" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Address" : {
+        "id" : "Address",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "cityName" : {
+            "type" : "string"
+          },
+          "pincode" : {
+            "type" : "string"
+          },
+          "contact_id" : {
+            "type" : "string",
+            "format" : "int64"
+          }
+        }
+      },
+      "Contact" : {
+        "id" : "Contact",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "phoneNo" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.r2.appservices.Services.getContacts" : {
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.Services.addAddress" : {
+        "request" : {
+          "$ref" : "Address"
+        },
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.Services.delete" : {
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.Services.addContact" : {
+        "request" : {
+          "$ref" : "Contact"
+        },
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      }
+    }
+  }
+}
