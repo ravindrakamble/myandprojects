@@ -1,0 +1,522 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://r2appservices.appspot.com/_ah/api",
+  "name" : "tracker",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://r2appservices.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "tracker.updateLocation" : {
+      "path" : "updateLocation",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.updateLocation",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.getUserLocations" : {
+      "path" : "getUserLocations",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.getUserLocations",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.signin" : {
+      "path" : "signin",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.signin",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.removeDevices" : {
+      "path" : "removeDevices",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.removeDevices",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.getUsers" : {
+      "path" : "getUsers",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.getUsers",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.login" : {
+      "path" : "login",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.login",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.returnDevice" : {
+      "path" : "returnDevice",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.returnDevice",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.updateRingStatus" : {
+      "path" : "updateRingStatus/{imei}/{status}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.updateRingStatus",
+      "request" : {
+        "parameters" : {
+          "imei" : {
+            "type" : "string",
+            "required" : true
+          },
+          "status" : {
+            "type" : "int32",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.assignDevice" : {
+      "path" : "assignDevice",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.assignDevice",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.sendNotification" : {
+      "path" : "sendNotification/{imei}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.sendNotification",
+      "request" : {
+        "parameters" : {
+          "imei" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.getDevices" : {
+      "path" : "getDevices",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.getDevices",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.addUser" : {
+      "path" : "addUser",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.addUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.deleteUserLocations" : {
+      "path" : "deleteUserLocations",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.deleteUserLocations",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tracker.registerDevice" : {
+      "path" : "registerDevice",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.r2.appservices.TrackerServices.registerDevice",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "UserLocation" : {
+        "id" : "UserLocation",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "userId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "latitude" : {
+            "type" : "string"
+          },
+          "longitude" : {
+            "type" : "string"
+          },
+          "altitude" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "firstame" : {
+            "type" : "string"
+          },
+          "ringStatus" : {
+            "type" : "integer"
+          },
+          "userEmail" : {
+            "type" : "string"
+          },
+          "projectName" : {
+            "type" : "string"
+          },
+          "startDate" : {
+            "type" : "string"
+          },
+          "returnDate" : {
+            "type" : "string"
+          },
+          "operationType" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ApiResponse" : {
+        "id" : "ApiResponse",
+        "type" : "object",
+        "properties" : {
+          "responseCode" : {
+            "type" : "integer"
+          },
+          "responseStatus" : {
+            "type" : "string"
+          },
+          "responseMessage" : {
+            "type" : "string"
+          },
+          "responseBody" : {
+            "type" : "string"
+          }
+        }
+      },
+      "LoginData" : {
+        "id" : "LoginData",
+        "type" : "object",
+        "properties" : {
+          "username" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "phoneNo" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "username" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UserDetails" : {
+        "id" : "UserDetails",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "firstame" : {
+            "type" : "string"
+          },
+          "ringStatus" : {
+            "type" : "integer"
+          },
+          "userEmail" : {
+            "type" : "string"
+          },
+          "projectName" : {
+            "type" : "string"
+          },
+          "startDate" : {
+            "type" : "string"
+          },
+          "returnDate" : {
+            "type" : "string"
+          },
+          "deviceID" : {
+            "type" : "string",
+            "format" : "int64"
+          }
+        }
+      },
+      "Device" : {
+        "id" : "Device",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "imei" : {
+            "type" : "string"
+          },
+          "regId" : {
+            "type" : "string"
+          },
+          "ringStatus" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.r2.appservices.TrackerServices.updateLocation" : {
+        "request" : {
+          "$ref" : "UserLocation"
+        },
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.getUserLocations" : {
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.signin" : {
+        "request" : {
+          "$ref" : "LoginData"
+        },
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.removeDevices" : {
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.getUsers" : {
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.login" : {
+        "request" : {
+          "$ref" : "User"
+        },
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.returnDevice" : {
+        "request" : {
+          "$ref" : "UserDetails"
+        },
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.updateRingStatus" : {
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.assignDevice" : {
+        "request" : {
+          "$ref" : "UserDetails"
+        },
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.sendNotification" : {
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.getDevices" : {
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.addUser" : {
+        "request" : {
+          "$ref" : "User"
+        },
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.deleteUserLocations" : {
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      },
+      "com.r2.appservices.TrackerServices.registerDevice" : {
+        "request" : {
+          "$ref" : "Device"
+        },
+        "response" : {
+          "$ref" : "ApiResponse"
+        }
+      }
+    }
+  }
+}
