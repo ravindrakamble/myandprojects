@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\exploded-aar\SalesForceAutomation\library\unspecified\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e424d1952c9771825bfc9e0167716c804e3933a0">
+        <dex dex="C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\classes-10995af06e5e31403a20736a8ecb75e1288f2419.jar" />
+    </item>
+    <item
+        jar="C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\classes-a6e19a671dd2936bf9e3c35ee2a17537e6f81135.jar" />
+    </item>
+    <item
+        jar="C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\classes-9d7e8a5062a74aff2cde8a4ef15a2824f9e08536.jar" />
+    </item>
+    <item
+        jar="C:\Users\ravindra.kambale\.gradle\caches\modules-2\files-2.1\com.androidplot\androidplot-core\0.6.1\3db0daea52375b26bfa61c59b8df93950bdefbbc\androidplot-core-0.6.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3db0daea52375b26bfa61c59b8df93950bdefbbc">
+        <dex dex="C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\androidplot-core-0.6.1-a512cbe6615f383680a406a74170d2998b2a76f3.jar" />
+    </item>
+    <item
+        jar="C:\Users\ravindra.kambale\.gradle\caches\modules-2\files-2.1\org.joda\joda-money\0.10.0\4056712d2e6db043a38b78c4ee2130c74bae7216\joda-money-0.10.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4056712d2e6db043a38b78c4ee2130c74bae7216">
+        <dex dex="C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\joda-money-0.10.0-8ce36f1c2dc2f84b5bfbe60051f4ce43ccc38723.jar" />
+    </item>
+    <item
+        jar="C:\Users\ravindra.kambale\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-664cbb47a24cdf00a50b42643123ae2ae85bbcf8.jar" />
+    </item>
+    <item
+        jar="C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-1f4dffb2f0917c4aff0c5aecd8fd03dd3ffbdbc8.jar" />
+    </item>
+
+</items>

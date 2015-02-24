@@ -1,0 +1,8 @@
+C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\classes\debug
+C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-664cbb47a24cdf00a50b42643123ae2ae85bbcf8.jar
+C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\classes-10995af06e5e31403a20736a8ecb75e1288f2419.jar
+C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\joda-money-0.10.0-8ce36f1c2dc2f84b5bfbe60051f4ce43ccc38723.jar
+C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-1f4dffb2f0917c4aff0c5aecd8fd03dd3ffbdbc8.jar
+C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\androidplot-core-0.6.1-a512cbe6615f383680a406a74170d2998b2a76f3.jar
+C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\classes-9d7e8a5062a74aff2cde8a4ef15a2824f9e08536.jar
+C:\Users\ravindra.kambale\AndroidStudioProjects\SalesForceAutomation\app\build\intermediates\pre-dexed\debug\classes-a6e19a671dd2936bf9e3c35ee2a17537e6f81135.jar
