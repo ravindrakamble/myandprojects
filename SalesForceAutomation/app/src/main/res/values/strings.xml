@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sales Force Automation</string>
+    <string name="title_menu_detail">Menu Detail</string>
+    <string name="content_description">CD</string>
+    <string name="login">Login</string>
+    <string name="login_id">User ID:</string>
+    <string name="password">Login Password:</string>
+    <string name="hint_login_id">Enter Login ID</string>
+    <string name="hint_password">Enter Password</string>
+    <string name="drawer_open">Slider Menu Opened</string>
+    <string name="drawer_close">Slider Menu Closed</string>
+    <string name="products">Products</string>
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item>Dashboard</item>
+        <item>Distributors</item>
+        <item>Retailers</item>
+        <item>Start a Day</item>
+        <item>Orders</item>
+    </string-array>
+
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_home</item>
+    </array>
+</resources>
