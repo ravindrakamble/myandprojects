@@ -110,12 +110,18 @@
     <!-- From: file:/C:/Users/ravindra.kambale/AndroidStudioProjects/SalesForceAutomation/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="divider">#595959</color>
+    <color name="green">#36A245</color>
     <!-- From: file:/C:/Users/ravindra.kambale/AndroidStudioProjects/SalesForceAutomation/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
     <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
+    <!-- From: file:/C:/Users/ravindra.kambale/AndroidStudioProjects/SalesForceAutomation/app/src/main/res/values/color.xml -->
+    <eat-comment/>
+    <color name="holo_blue_light">#ff33b5e5</color>
+    <!-- From: file:/C:/Users/ravindra.kambale/AndroidStudioProjects/SalesForceAutomation/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <color name="link_text_material_dark">@color/material_deep_teal_200</color>
     <color name="link_text_material_light">@color/material_deep_teal_500</color>
     <!-- From: file:/C:/Users/ravindra.kambale/AndroidStudioProjects/SalesForceAutomation/app/src/main/res/values/color.xml -->
@@ -140,7 +146,11 @@
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
     <color name="ripple_material_dark">#40ffffff</color>
+    <!-- From: file:/C:/Users/ravindra.kambale/AndroidStudioProjects/SalesForceAutomation/app/src/main/res/values/color.xml -->
+    <eat-comment/>
     <color name="ripple_material_light">#40000000</color>
+    <!-- From: file:/C:/Users/ravindra.kambale/AndroidStudioProjects/SalesForceAutomation/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
     <color name="secondary_text_default_material_light">#8a000000</color>
     <color name="secondary_text_disabled_material_dark">#36ffffff</color>
@@ -305,21 +315,28 @@
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <!-- From: file:/C:/Users/ravindra.kambale/AndroidStudioProjects/SalesForceAutomation/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="action_settings">Settings</string>
     <string name="app_name">Sales Force Automation</string>
     <string name="content_description">CD</string>
     <string name="drawer_close">Slider Menu Closed</string>
     <string name="drawer_open">Slider Menu Opened</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hint_login_id">Enter Login ID</string>
     <string name="hint_password">Enter Password</string>
     <string name="login">Login</string>
     <string name="login_id">User ID:</string>
     <string name="password">Login Password:</string>
+    <string name="piechart_daily">Today\'s Status</string>
+    <string name="piechart_monthly">Monthly Status</string>
     <string name="products">Products</string>
     <string name="title_menu_detail">Menu Detail</string>
     <!-- From: file:/C:/Users/ravindra.kambale/AndroidStudioProjects/SalesForceAutomation/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/holo_blue_light</item>
+        <item name="colorPrimaryDark">@color/green</item>
+        <item name="colorAccent">@color/ripple_material_light</item>
     </style>
     <!-- From: file:/C:/Users/ravindra.kambale/AndroidStudioProjects/SalesForceAutomation/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
@@ -1083,7 +1100,6 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">15sp</item>
         <item name="android:background">@drawable/header_bg</item>
-
     </style>
     <!-- From: file:/C:/Users/ravindra.kambale/AndroidStudioProjects/SalesForceAutomation/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
