@@ -29,7 +29,8 @@ import java.util.List;
 public class Dashboard extends Fragment implements UiUpdator {
 
     private View rootView = null;
-    private PieChart pie;
+    private PieChart pieDaily;
+    private PieChart pieMonthly;
 
     private Segment s1;
     private Segment s2;
@@ -38,14 +39,16 @@ public class Dashboard extends Fragment implements UiUpdator {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.dashboard, container, false);
-        pie = (PieChart)rootView.findViewById(R.id.mySimplePieChart);
+        pieDaily = (PieChart)rootView.findViewById(R.id.mySimplePieChart);
+        pieMonthly = (PieChart)rootView.findViewById(R.id.piechart_monthly);
         lstProducts = (ListView)rootView.findViewById(R.id.list_products);
         new Handler().post(
                 new Runnable() {
                     public void run() {
                         if(getActivity() != null){
                             getProducts();
-                            drawPieChart();
+                            drawPieChartDaily();
+                            drawPieChartMonthly();
                         }
                     }
                 });
@@ -67,7 +70,35 @@ public class Dashboard extends Fragment implements UiUpdator {
         productListAdapter = new ProductListAdapter(getActivity(), R.layout.only_product_row, purchasedProducts);
         lstProducts.setAdapter(productListAdapter);
     }
-    public void drawPieChart(){
+    public void drawPieChartDaily(){
+        s1 = new Segment("70 %", 20);
+        s2 = new Segment("30 %", 5);
+
+        EmbossMaskFilter emf = new EmbossMaskFilter(
+                new float[]{1, 1, 1}, 0.4f, 10, 8.2f);
+
+        SegmentFormatter sf1 = new SegmentFormatter();
+        sf1.configure(getActivity().getApplicationContext(), R.xml.pie_segment_formatter4);
+
+        sf1.getFillPaint().setMaskFilter(emf);
+
+        SegmentFormatter sf2 = new SegmentFormatter();
+        sf2.configure(getActivity().getApplicationContext(), R.xml.pie_segment_formatter2);
+
+        sf2.getFillPaint().setMaskFilter(emf);
+
+
+
+        pieDaily.addSeries(s1, sf1);
+        pieDaily.addSeries(s2, sf2);
+
+        pieDaily.getBorderPaint().setColor(Color.TRANSPARENT);
+        pieDaily.getBackgroundPaint().setColor(Color.WHITE);
+        pieDaily.getRenderer(PieRenderer.class).setDonutSize(0.3f, PieRenderer.DonutMode.PERCENT);
+        pieDaily.redraw();
+    }
+
+    public void drawPieChartMonthly(){
         s1 = new Segment("60 %", 20);
         s2 = new Segment("40 %", 5);
 
@@ -86,12 +117,12 @@ public class Dashboard extends Fragment implements UiUpdator {
 
 
 
-        pie.addSeries(s1, sf1);
-        pie.addSeries(s2, sf2);
+        pieMonthly.addSeries(s1, sf1);
+        pieMonthly.addSeries(s2, sf2);
 
-        pie.getBorderPaint().setColor(Color.TRANSPARENT);
-        pie.getBackgroundPaint().setColor(Color.WHITE);
-        pie.getRenderer(PieRenderer.class).setDonutSize(0.3f, PieRenderer.DonutMode.PERCENT);
-        pie.redraw();
+        pieMonthly.getBorderPaint().setColor(Color.TRANSPARENT);
+        pieMonthly.getBackgroundPaint().setColor(Color.WHITE);
+        pieMonthly.getRenderer(PieRenderer.class).setDonutSize(0.3f, PieRenderer.DonutMode.PERCENT);
+        pieMonthly.redraw();
     }
 }

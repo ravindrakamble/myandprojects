@@ -56,26 +56,59 @@
                 style="@style/Header.TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/products" />
+                android:text="@string/piechart_monthly" />
 
-            <ListView
-                android:id="@+id/list_products"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_products" />
-
-            <TextView
-                android:id="@+id/empty"
+            <com.androidplot.pie.PieChart
+                android:id="@+id/piechart_monthly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_above="@+id/rl_piechart_monthly"
                 android:layout_below="@+id/txt_products"
-                android:text="@string/products"
-                android:visibility="invisible"
-                android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/dashboard_txt"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:layout_margin="10dp"
+                androidPlot.titleWidget.labelPaint.textSize="15sp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_piechart_monthly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/container_background" >
+
+                <TextView
+                    android:id="@+id/txt_monthly_products_color"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/segment_2" />
+
+                <TextView
+                    android:id="@+id/txt_monthly_products_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/txt_monthly_products_color"
+                    android:text="Completed" />
+
+                <TextView
+                    android:id="@+id/txt_monthly_booking_flight_color"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/txt_monthly_products_txt"
+                    android:background="@color/segment_4" />
+
+                <TextView
+                    android:id="@+id/txt_monthly_booking_flight_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/txt_monthly_booking_flight_color"
+                    android:text="Remaining" />
+
+
+            </RelativeLayout>
         </RelativeLayout>
 
         <RelativeLayout
@@ -90,7 +123,7 @@
                 style="@style/Header.TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/products" />
+                android:text="@string/piechart_daily" />
 
             <com.androidplot.pie.PieChart
                 android:id="@+id/mySimplePieChart"
@@ -168,7 +201,7 @@
                 android:text="Top Products" />
 
             <ListView
-                android:id="@+id/list_socials"
+                android:id="@+id/list_products"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_social" />
@@ -182,36 +215,30 @@
             android:background="@drawable/border_details" >
 
             <TextView
-                android:id="@+id/txt_offers"
+                android:id="@+id/txt_least_products"
                 style="@style/Header.TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Least Products" />
 
-            <LinearLayout
-                android:id="@+id/main_layout"
+            <ListView
+                android:id="@+id/list_products_least"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_offers"
-                android:orientation="horizontal" >
+                android:layout_below="@+id/txt_least_products" />
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp" />
-            </LinearLayout>
-
-            <com.viewpagerindicator.CirclePageIndicator
-                android:id="@+id/indicator"
+            <TextView
+                android:id="@+id/empty_least"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/main_layout"
+                android:layout_below="@+id/list_products_least"
+                android:text="@string/products"
+                android:visibility="invisible"
+                android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
-                android:padding="10dip" />
+                android:textColor="@color/dashboard_txt"
+                android:textSize="17sp"
+                android:textStyle="bold" />
         </RelativeLayout>
     </LinearLayout>
 
