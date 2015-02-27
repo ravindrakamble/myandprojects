@@ -9,11 +9,13 @@ import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,14 +27,18 @@ import com.r2apps.sfa.dao.NavDrawerItem;
 import com.r2apps.sfa.fragments.AddRetailer;
 import com.r2apps.sfa.fragments.Dashboard;
 import com.r2apps.sfa.fragments.Distributors;
+import com.r2apps.sfa.fragments.Orders;
 import com.r2apps.sfa.fragments.Preferences;
 import com.r2apps.sfa.fragments.Retailers;
+import com.r2apps.sfa.fragments.Stores;
 import com.r2apps.sfa.util.AppConstants;
 
 import java.util.ArrayList;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements Distributors.OnFragmentInteractionListener, Retailers.OnFragmentInteractionListener,
+        Orders.OnFragmentInteractionListener, AddRetailer.OnFragmentInteractionListener, Preferences.OnFragmentInteractionListener,
+        Stores.OnFragmentInteractionListener{
 
     // slide menu items
     private Toolbar toolbar;
@@ -78,12 +84,11 @@ public class MainActivity extends ActionBarActivity {
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
 
         // Recycle the typed array
         navMenuIcons.recycle();
-
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-       // getActionBar().setHomeButtonEnabled(true);
 
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
@@ -99,22 +104,25 @@ public class MainActivity extends ActionBarActivity {
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 toolbar,
-                R.string.drawer_open, // nav drawer open - description for accessibility
-                R.string.drawer_close // nav drawer close - description for accessibility
+                R.string.app_name, // nav drawer open - description for accessibility
+                R.string.app_name // nav drawer close - description for accessibility
         ) {
             public void onDrawerClosed(View view) {
-                toolbar.setTitle("Menu Closed");
                 invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
-                toolbar.setTitle("Menu Opened");
                 invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         displayView(AppConstants.DASHBOARD);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     /**
@@ -125,8 +133,12 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-
-
+            Log.i("onItemClick", "Position:" + position);
+            displayView(position);
+            //mDrawerList.setItemChecked(position, true);
+            //mDrawerList.setSelection(position);
+            //adapter.setSelectedPosition(position);
+            mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
 
@@ -150,18 +162,28 @@ public class MainActivity extends ActionBarActivity {
                 break;
 
             case AppConstants.RETAILERS:
-                setTitle("Distributors");
+                setTitle("Retailers");
                 fragment = new Retailers();
                 break;
 
             case AppConstants.PREFERENCES:
-                setTitle("Distributors");
+                setTitle("Start A Day");
                 fragment = new Preferences();
                 break;
 
+            case AppConstants.ORDERS:
+                setTitle("Orders");
+                fragment = new Orders();
+                break;
+
             case AppConstants.ADD_RETAILER:
-                setTitle("Distributors");
+                setTitle("Add Retailer");
                 fragment = new AddRetailer();
+                break;
+
+            case AppConstants.STORES:
+                setTitle("Stores Around You");
+                fragment = new Stores();
                 break;
         }
         if(fragment != null){

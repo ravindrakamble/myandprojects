@@ -23,11 +23,15 @@
         <item>Retailers</item>
         <item>Start a Day</item>
         <item>Orders</item>
+        <item>Add Retailer</item>
+        <item>Stores Around Me</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_home</item>
         <item>@drawable/ic_home</item>
         <item>@drawable/ic_home</item>
         <item>@drawable/ic_home</item>
