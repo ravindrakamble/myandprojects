@@ -31,6 +31,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
 	private class ViewHolder {
 		ImageView imageView;
 		TextView txtTitle;
+        TextView txtSubTitle;
 		TextView txtprice;
 	}
 
@@ -50,6 +51,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
 
 			holder.txtprice= (TextView)convertView.findViewById(R.id.price);
 			holder.txtTitle = (TextView)convertView.findViewById(R.id.title);
+            holder.txtSubTitle = (TextView)convertView.findViewById(R.id.sizeunit);
 			holder.imageView = (ImageView)convertView.findViewById(R.id.icon);
 		} else{
 			holder = (ViewHolder) convertView.getTag();
@@ -65,6 +67,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
 		}
 		
 		holder.txtTitle.setText(product.name);
+        holder.txtSubTitle.setText(product.size + product.unit);
 		holder.txtprice.setText(product.price);
 		
 		

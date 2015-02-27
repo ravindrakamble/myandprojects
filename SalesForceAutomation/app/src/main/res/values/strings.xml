@@ -35,6 +35,16 @@
         <item>@drawable/ic_home</item>
     </array>
 
+    <string-array name="States">
+        <item>Maharastra</item>
+        <item>Karanataka</item>
+        <item>Madhapradesh</item>
+    </string-array>
+    <string-array name="Cities">
+        <item>Pune</item>
+        <item>Kolhapur</item>
+        <item>Sangli</item>
+    </string-array>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

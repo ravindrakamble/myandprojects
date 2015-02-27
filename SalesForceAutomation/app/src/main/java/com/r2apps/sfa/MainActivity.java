@@ -9,7 +9,6 @@ import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -26,7 +25,6 @@ import com.r2apps.sfa.dao.NavDrawerItem;
 import com.r2apps.sfa.fragments.AddRetailer;
 import com.r2apps.sfa.fragments.Dashboard;
 import com.r2apps.sfa.fragments.Distributors;
-import com.r2apps.sfa.fragments.Orders;
 import com.r2apps.sfa.fragments.Preferences;
 import com.r2apps.sfa.fragments.Retailers;
 import com.r2apps.sfa.util.AppConstants;
@@ -34,8 +32,7 @@ import com.r2apps.sfa.util.AppConstants;
 import java.util.ArrayList;
 
 
-public class MainActivity extends ActionBarActivity implements Distributors.OnFragmentInteractionListener,Retailers.OnFragmentInteractionListener,
-Orders.OnFragmentInteractionListener, AddRetailer.OnFragmentInteractionListener, Preferences.OnFragmentInteractionListener{
+public class MainActivity extends ActionBarActivity {
 
     // slide menu items
     private Toolbar toolbar;
@@ -85,6 +82,9 @@ Orders.OnFragmentInteractionListener, AddRetailer.OnFragmentInteractionListener,
         // Recycle the typed array
         navMenuIcons.recycle();
 
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
+       // getActionBar().setHomeButtonEnabled(true);
+
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
         // setting the nav drawer list adapter
@@ -92,28 +92,29 @@ Orders.OnFragmentInteractionListener, AddRetailer.OnFragmentInteractionListener,
                 navDrawerItems);
         mDrawerList.setAdapter(adapter);
 
+        // enabling action bar app icon and behaving it as toggle button
+       /// getActionBar().setIcon(R.drawable.abs__ic_menu_moreoverflow_normal_holo_dark);
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        //getActionBar().setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 toolbar,
-                R.string.app_name, // nav drawer open - description for accessibility
-                R.string.app_name // nav drawer close - description for accessibility
+                R.string.drawer_open, // nav drawer open - description for accessibility
+                R.string.drawer_close // nav drawer close - description for accessibility
         ) {
             public void onDrawerClosed(View view) {
+                toolbar.setTitle("Menu Closed");
                 invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
+                toolbar.setTitle("Menu Opened");
                 invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         displayView(AppConstants.DASHBOARD);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     /**
@@ -125,12 +126,7 @@ Orders.OnFragmentInteractionListener, AddRetailer.OnFragmentInteractionListener,
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
 
-            mDrawerList.setItemChecked(position, true);
-            mDrawerList.setSelection(position);
-            mDrawerLayout.closeDrawer(mDrawerList);
-            adapter.setSelectedPosition(position);
 
-            displayView(position);
         }
     }
 
