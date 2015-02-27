@@ -21,6 +21,8 @@ import com.r2apps.sfa.dao.Product;
 import com.r2apps.sfa.http.RestResponse;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,12 +38,16 @@ public class Dashboard extends Fragment implements UiUpdator {
     private Segment s2;
     private ListView lstProducts;
     private ProductListAdapter productListAdapter;
+
+    private ListView lstLeastProducts;
+    private ProductListAdapter leastProductListAdapter;
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.dashboard, container, false);
         pieDaily = (PieChart)rootView.findViewById(R.id.mySimplePieChart);
         pieMonthly = (PieChart)rootView.findViewById(R.id.piechart_monthly);
         lstProducts = (ListView)rootView.findViewById(R.id.list_products);
+        lstLeastProducts = (ListView)rootView.findViewById(R.id.list_products_least);
         new Handler().post(
                 new Runnable() {
                     public void run() {
@@ -62,13 +68,75 @@ public class Dashboard extends Fragment implements UiUpdator {
     }
 
     private void getProducts() {
-        List<Product> purchasedProducts = new ArrayList<Product>();
-        Product product = new Product();
-        product.name = "Licel";
-        product.price = "100";
-        purchasedProducts.add(product);
+        List<Product> purchasedProducts = getListOfProducts();
+
         productListAdapter = new ProductListAdapter(getActivity(), R.layout.only_product_row, purchasedProducts);
         lstProducts.setAdapter(productListAdapter);
+
+        Collections.reverse(purchasedProducts);
+        leastProductListAdapter = new ProductListAdapter(getActivity(), R.layout.only_product_row, purchasedProducts);
+        lstLeastProducts.setAdapter(productListAdapter);
+    }
+
+    private List<Product> getListOfProducts(){
+        List<Product> productList = new ArrayList<Product>();
+        Product product = new Product();
+        product.name = "Licel";
+        product.size = "20";
+        product.unit = "ml";
+        product.price = "35";
+        product.promoPrice = "31";
+        productList.add(product);
+
+        product = new Product();
+        product.name = "Licel";
+        product.size = "50";
+        product.unit = "ml";
+        product.price = "70";
+        product.promoPrice = "63";
+        productList.add(product);
+
+        product = new Product();
+        product.name = "Nok 99 Liquid";
+        product.size = "50";
+        product.unit = "ml";
+        product.price = "35";
+        product.promoPrice = "32";
+        productList.add(product);
+
+        product = new Product();
+        product.name = "Nok 99 Liquid";
+        product.size = "1";
+        product.unit = "Ltr";
+        product.price = "240";
+        product.promoPrice = "215";
+        productList.add(product);
+
+        product = new Product();
+        product.name = "Nok Bait";
+        product.size = "25";
+        product.unit = "gms";
+        product.price = "20";
+        product.promoPrice = "18";
+        productList.add(product);
+
+        product = new Product();
+        product.name = "Woodshield";
+        product.size = "100";
+        product.unit = "ml";
+        product.price = "60";
+        product.promoPrice = "54";
+        productList.add(product);
+
+        product = new Product();
+        product.name = "Airoma";
+        product.size = "320";
+        product.unit = "ml";
+        product.price = "120";
+        product.promoPrice = "105";
+        productList.add(product);
+
+        return productList;
     }
     public void drawPieChartDaily(){
         s1 = new Segment("70 %", 20);
