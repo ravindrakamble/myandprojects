@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class DataLoader {
     public static List<Product> getListOfProducts(){
-        List<Product> productList = new ArrayList<Product>();
+        List<Product> productList = new ArrayList<>();
         Product product = new Product();
         product.name = "Licel";
         product.size = "20";
@@ -73,7 +73,7 @@ public class DataLoader {
     }
 
     public static List<Retailer> getRetailers(){
-        List<Retailer> retilerList = new ArrayList<Retailer>();
+        List<Retailer> retilerList = new ArrayList<>();
         Retailer retailer = new Retailer();
 
         for(int i = 0; i < 20; i++){
@@ -87,8 +87,8 @@ public class DataLoader {
     }
 
     public static List<Distributor> getDistributors(){
-        List<Distributor> distList = new ArrayList<Distributor>();
-        Distributor dist = new Distributor();
+        List<Distributor> distList = new ArrayList<>();
+        Distributor dist = null;
 
         for(int i = 0; i < 20; i++){
             dist = new Distributor();
