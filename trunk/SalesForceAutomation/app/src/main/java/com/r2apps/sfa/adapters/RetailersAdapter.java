@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.r2apps.sfa.R;
-import com.r2apps.sfa.dao.Distributor;
 import com.r2apps.sfa.dao.Retailer;
 
 import java.util.List;

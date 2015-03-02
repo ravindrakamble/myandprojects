@@ -21,8 +21,6 @@ import com.r2apps.sfa.dao.Product;
 import com.r2apps.sfa.http.RestResponse;
 import com.r2apps.sfa.util.DataLoader;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
