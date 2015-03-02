@@ -7,8 +7,14 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.r2apps.sfa.R;
+import com.r2apps.sfa.adapters.OrderProductAdapter;
+import com.r2apps.sfa.dao.Product;
+import com.r2apps.sfa.util.DataLoader;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +34,8 @@ public class Orders extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private ListView listViewOredrProducts;
+    private OrderProductAdapter orderProductAdapter;
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -65,7 +73,12 @@ public class Orders extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_orders, container, false);
+        View view = inflater.inflate(R.layout.fragment_orders, container, false);
+        listViewOredrProducts = (ListView)view.findViewById(R.id.list_order_product);
+        List<Product> orderProducts = DataLoader.getListOfProducts();
+        orderProductAdapter = new OrderProductAdapter(getActivity(), R.layout.row_order, orderProducts);
+        listViewOredrProducts.setAdapter(orderProductAdapter);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

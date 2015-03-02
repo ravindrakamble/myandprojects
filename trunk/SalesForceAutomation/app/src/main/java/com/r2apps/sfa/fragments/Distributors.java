@@ -7,8 +7,16 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.r2apps.sfa.R;
+import com.r2apps.sfa.adapters.DistributorAdapter;
+import com.r2apps.sfa.adapters.RetailersAdapter;
+import com.r2apps.sfa.dao.Distributor;
+import com.r2apps.sfa.dao.Retailer;
+import com.r2apps.sfa.util.DataLoader;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +36,8 @@ public class Distributors extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private ListView listViewDistributors;
+    private DistributorAdapter distributorAdapter;
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -65,7 +75,13 @@ public class Distributors extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_distributors, container, false);
+        View view = inflater.inflate(R.layout.fragment_distributors, container, false);
+        listViewDistributors = (ListView)view.findViewById(R.id.list_distributors);
+        List<Distributor> distributors = DataLoader.getDistributors();
+        distributorAdapter = new DistributorAdapter(getActivity(), R.layout.row_distributor, distributors);
+        listViewDistributors.setAdapter(distributorAdapter);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

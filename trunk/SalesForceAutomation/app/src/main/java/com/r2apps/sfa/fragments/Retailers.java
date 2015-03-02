@@ -7,8 +7,16 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.r2apps.sfa.R;
+import com.r2apps.sfa.adapters.OrderProductAdapter;
+import com.r2apps.sfa.adapters.RetailersAdapter;
+import com.r2apps.sfa.dao.Product;
+import com.r2apps.sfa.dao.Retailer;
+import com.r2apps.sfa.util.DataLoader;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +35,8 @@ public class Retailers extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ListView listViewRetailers;
+    private RetailersAdapter retailersAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +75,13 @@ public class Retailers extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_retailers, container, false);
+        View view = inflater.inflate(R.layout.fragment_retailers, container, false);
+        listViewRetailers = (ListView)view.findViewById(R.id.list_retailers);
+        List<Retailer> retailers = DataLoader.getRetailers();
+        retailersAdapter = new RetailersAdapter(getActivity(), R.layout.row_retailer, retailers);
+        listViewRetailers.setAdapter(retailersAdapter);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
