@@ -74,7 +74,7 @@ public class Dashboard extends Fragment implements UiUpdator {
 
         Collections.reverse(purchasedProducts);
         leastProductListAdapter = new ProductListAdapter(getActivity(), R.layout.only_product_row, purchasedProducts);
-        lstLeastProducts.setAdapter(productListAdapter);
+        lstLeastProducts.setAdapter(leastProductListAdapter);
     }
 
 
