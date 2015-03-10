@@ -6,11 +6,12 @@ package com.r2apps.sfa.util;
 public interface AppConstants {
     int DASHBOARD = 0;
     int DISTRIBUTOR = 1;
-    int RETAILERS = 2;
-    int PREFERENCES = 3;
-    int ORDERS = 4;
-    int ADD_RETAILER = 5;
-    int STORES = 6;
+    int PRODUCTS = 2;
+    int RETAILERS = 3;
+    int PREFERENCES = 4;
+    int ORDERS = 5;
+    int ADD_RETAILER = 6;
+    int STORES = 7;
 
     int DISTANCE_IN_METERS = 5000;
     String LOCATION = "12.8897331,77.5780595";

@@ -20,6 +20,7 @@
     <string-array name="nav_drawer_items">
         <item>Dashboard</item>
         <item>Distributors</item>
+        <item>Products</item>
         <item>Retailers</item>
         <item>Start a Day</item>
         <item>Orders</item>
@@ -31,6 +32,7 @@
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
         <item>@drawable/ic_home</item>
+        <item>@drawable/grid</item>
         <item>@drawable/ic_home</item>
         <item>@drawable/ic_home</item>
         <item>@drawable/ic_home</item>
