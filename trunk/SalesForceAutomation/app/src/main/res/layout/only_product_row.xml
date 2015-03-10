@@ -20,7 +20,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_home" />
+            android:src="@drawable/list" />
     </LinearLayout>
 
     <TextView

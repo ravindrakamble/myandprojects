@@ -29,6 +29,7 @@ import com.r2apps.sfa.fragments.Dashboard;
 import com.r2apps.sfa.fragments.Distributors;
 import com.r2apps.sfa.fragments.Orders;
 import com.r2apps.sfa.fragments.Preferences;
+import com.r2apps.sfa.fragments.ProductsFragment;
 import com.r2apps.sfa.fragments.Retailers;
 import com.r2apps.sfa.fragments.Stores;
 import com.r2apps.sfa.util.AppConstants;
@@ -38,7 +39,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity implements Distributors.OnFragmentInteractionListener, Retailers.OnFragmentInteractionListener,
         Orders.OnFragmentInteractionListener, AddRetailer.OnFragmentInteractionListener, Preferences.OnFragmentInteractionListener,
-        Stores.OnFragmentInteractionListener{
+        Stores.OnFragmentInteractionListener, ProductsFragment.OnFragmentInteractionListener{
 
     // slide menu items
     private Toolbar toolbar;
@@ -86,6 +87,7 @@ public class MainActivity extends ActionBarActivity implements Distributors.OnFr
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(7, -1)));
 
         // Recycle the typed array
         navMenuIcons.recycle();
@@ -159,6 +161,11 @@ public class MainActivity extends ActionBarActivity implements Distributors.OnFr
             case AppConstants.DISTRIBUTOR:
                 setTitle("Distributors");
                 fragment = new Distributors();
+                break;
+
+            case AppConstants.PRODUCTS:
+                setTitle("Distributors");
+                fragment = new ProductsFragment();
                 break;
 
             case AppConstants.RETAILERS:
